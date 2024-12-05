@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+{% extends 'layout1.html' %}
+
+{% block style %}
+<div class="container">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1DB954, #191414);  /* Spotify風のグラデーション */
+            color: white;  /* テキスト色を白に */
+            font-family: 'Arial', sans-serif;  /* シンプルで現代的なフォント */
+            padding: 30px;  /* 余白を追加 */
+        }
+
+        .container {
+            text-align: center;  /* コンテンツを中央に配置 */
+            margin-top: 50px;
+        }
+
+        .data {
+            border-collapse: collapse;
+            margin: 10px 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);  /* 背景をダークに */
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .data td, .data th {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .data th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        /* おすすめプレイリストの文字のスタイル */
+        h1 {
+            font-size: 48px;  /* フォントサイズを大きく */
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;  /* 太字 */
+            color: white;
+            background: linear-gradient(135deg, #1DB954, #FF6F00);  /* グラデーションカラー */
+            -webkit-background-clip: text;  /* 背景色を文字に適用 */
+            background-clip: text;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);  /* テキストシャドウ */
+            animation: fadeIn 1s ease-in-out;  /* アニメーション追加 */
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* アンケートリンクのスタイル */
+        .survey-link {
+            display: block;  /* ブロック要素にして中央に配置 */
+            background-color: #1DB954;  /* Spotifyの緑色 */
+            color: white;
+            padding: 18px 35px;  /* ボタンの大きさを大きく */
+            text-align: center;
+            font-size: 22px;  /* フォントサイズを大きく */
+            border-radius: 50px;  /* 丸みを帯びたボタン */
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;  /* アニメーション */
+            margin: 30px auto;  /* 左右を自動で中央配置 */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);  /* ボタンに影を追加 */
+            width: fit-content;  /* コンテンツの幅に合わせる */
+        }
+
+        .survey-link:hover {
+            background-color: #1ed760;  /* ホバー時の色 */
+            transform: scale(1.1);  /* 少し大きくなるエフェクト */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);  /* ホバー時に影を強調 */
+        }
+
+        .survey-link:focus {
+            outline: none;  /* フォーカス時のアウトラインを非表示 */
+        }
+
+        .btn-dark {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-dark:hover {
+            background-color: #444;  /* 戻るボタンのホバー時 */
+        }
+
+    </style>
+</div>
+{% endblock %}
+
+{% block body %}
+<body>
+    <div class="position-absolute top-0 start-0">
+        <h1>おすすめプレイリスト</h1>
+        
+        {% if tables %}
+            {% for table in tables %}
+                {{ table|safe }}
+            {% endfor %}
+        
+            <div class="mt-5">
+                
+            </div>
+        {% else %}
+            <p>選択されたカテゴリーにデータがありません。</p>
+        {% endif %}
+
+        <!-- アンケートリンクをボタン風に -->
+        <div class="button-container">
+            <a href="https://docs.google.com/forms/d/1rPO7VxBldLdFCeu__gRgjydRA_CpAY7oXvx-DIYyPw4/edit" target="_blank" class="survey-link">アンケートに答える</a>
+        </div>
+
+        <a href="/" class="btn-dark">戻る</a>
+    </div>
+</body>
+{% endblock %}
